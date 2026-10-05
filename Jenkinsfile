@@ -53,7 +53,7 @@ pipeline {
                     if [ ! -d .repo ]; then
                         repo init -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
                     fi
-                    repo sync -c -j"$(nproc)" --force-sync --no-clone-bundle --no-tags
+                    repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
                 '''
             }
         }
