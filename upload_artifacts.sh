@@ -10,7 +10,7 @@ CODENAME="$2"
 DATE_TAG="$(date +%Y%m%d)"
 DEST="${S3_BUCKET:?S3_BUCKET not set}/${CODENAME}/"
 
-ZIP_PATH="$(ls -t "${OUT_DIR}"/frosty-*.zip 2>/dev/null | head -n1 || true)"
+ZIP_PATH="$(ls -t "${OUT_DIR}"/frosty_${CODENAME}_ananas*.zip 2>/dev/null | head -n1 || true)"
 
 if [ -z "$ZIP_PATH" ]; then
     echo "No build artifact found for ${CODENAME} in ${OUT_DIR}" >&2
