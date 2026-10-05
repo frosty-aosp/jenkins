@@ -26,6 +26,10 @@ pipeline {
                description: 'Manifest branch/revision to build')
         string(name: 'DEVICES_FILTER', defaultValue: '',
                description: 'Comma-separated codenames to build. Empty = build every device in devices.txt')
+        string(name: 'FROSTY_BUILDTYPE', defaultValue: 'WEEKLY',
+               description: 'Target buildtype')
+        booleanParam(name: 'CLEAN_BUILD', defaultValue: true,
+                description: 'Should a m clean be ran before build')
     }
 
     environment {
@@ -55,6 +59,16 @@ pipeline {
                     fi
                     repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
                 '''
+            }
+        }
+
+        stage('Clean build') {
+            when {
+                expression{ return params.CLEAN_BUILD }
+            }
+
+            steps {
+                sh 'rm -rf out*'
             }
         }
 
@@ -89,7 +103,14 @@ pipeline {
                                     mka installclean
                                     mka bacon
                                 """
+                            } catch (err) {
+                                echo "Build failed for ${codename}: ${err}"
+                                failed.add(codename)
+                            }
+                        }
 
+                        stage("Upload to S3: ${codename}") {
+                            try {
                                 withCredentials([[
                                     $class: 'AmazonWebServicesCredentialsBinding',
                                     credentialsId: 'frosty-s3-uploader'
@@ -101,7 +122,7 @@ pipeline {
                                     """
                                 }
                             } catch (err) {
-                                echo "Build failed for ${codename}: ${err}"
+                                echo "Upload failed for ${codename}: ${err}"
                                 failed.add(codename)
                             }
                         }
