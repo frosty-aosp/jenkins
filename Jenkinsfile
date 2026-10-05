@@ -68,7 +68,8 @@ pipeline {
             }
 
             steps {
-                sh 'rm -rf out*'
+                sh """cd "\$SRC_DIR"
+                rm -rf out*"""
             }
         }
 
