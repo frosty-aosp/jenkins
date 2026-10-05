@@ -81,8 +81,7 @@ pipeline {
                                 // device's tree (and its kernel/vendor deps) from
                                 // frosty-devices, syncs just the new projects, and
                                 // resolves the right lunch combo — no prefix needed.
-                                sh """
-                                    #!/usr/bin/env bash
+                                sh """#!/usr/bin/env bash
                                     set -e
                                     cd "\$SRC_DIR"
                                     source build/envsetup.sh
