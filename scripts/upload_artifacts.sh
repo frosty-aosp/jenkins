@@ -30,7 +30,7 @@ if [ -f "${ZIP_PATH}.sha256sum" ]; then
     aws s3 cp "${ZIP_PATH}.sha256sum" "$DEST"
 fi
 
-if [ -f "${ZIP_PATH}.json" && $UPLOAD_OTA == true ]; then
+if [[ -f "${ZIP_PATH}.json" && $UPLOAD_OTA == true ]]; then
     aws s3 cp "${ZIP_PATH}.json" "${S3_BUCKET}/json/ananas/${CODENAME}.json"
 fi
 
