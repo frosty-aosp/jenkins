@@ -91,7 +91,7 @@ pipeline {
                                 """
 
                                 withCredentials([[
-                                    \$class: 'AmazonWebServicesCredentialsBinding',
+                                    $class: 'AmazonWebServicesCredentialsBinding',
                                     credentialsId: 'frosty-s3-uploader'
                                 ]]) {
                                     sh """
