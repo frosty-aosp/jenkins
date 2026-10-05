@@ -39,6 +39,7 @@ pipeline {
         CCACHE_SIZE  = '200G'
         S3_BUCKET    = 's3://frosty'
         DEVICES_FILE = "${WORKSPACE}/devices.txt"
+        KEYS_DIR = "/code/keys"
     }
 
     stages {
