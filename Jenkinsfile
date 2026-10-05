@@ -33,7 +33,7 @@ pipeline {
         CCACHE_DIR   = '/code/ccache'
         USE_CCACHE   = '1'
         CCACHE_SIZE  = '200G'
-        S3_BUCKET    = 's3://frosty-builds'
+        S3_BUCKET    = 's3://frosty'
         DEVICES_FILE = "${WORKSPACE}/devices.txt"
     }
 
