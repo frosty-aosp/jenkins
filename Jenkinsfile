@@ -55,9 +55,7 @@ pipeline {
                     set -e
                     mkdir -p "$SRC_DIR" "$CCACHE_DIR"
                     cd "$SRC_DIR"
-                    if [ ! -d .repo ]; then
-                        repo init -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
-                    fi
+                    repo init -u "$MANIFEST_URL" -b "$MANIFEST_BRANCH"
                     repo sync -c -j4 --force-sync --no-clone-bundle --no-tags
                 '''
             }
